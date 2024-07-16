@@ -126,7 +126,21 @@ Once you have the cloned project in your repository. Follow the steps below to l
 
 Start a browser and you will enter the following link and you can start drawing.
 
-https://ec2-52-23-230-34.compute-1.amazonaws.com:8443/login 
+1. You need to use te next commands in terminal of AWS:
+
+
+    sudo yum update -y
+    sudo yum install -y docker
+    sudo service docker start
+    sudo usermod -a -G docker ec2-user
+
+
+2. Next you put the file .JAR need use:
+
+    docker ps
+    docker run --name some-redis -p 45000:6379 -d redis
+
+https://ec2-3-92-144-238.compute-1.amazonaws.com:8443/login  
 
 ![alt text](images/imageTest.png) 
 
