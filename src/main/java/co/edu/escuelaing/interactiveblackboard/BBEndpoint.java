@@ -1,3 +1,4 @@
+ 
 package co.edu.escuelaing.interactiveblackboard;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class BBEndpoint {
     static Queue<Session> queue = new ConcurrentLinkedQueue<>();
     Session ownSession = null;
 
-    private boolean accepted = false;
+    public boolean accepted = false;
     
     /* Call this method to send a message to all clients */
     public void send(String msg) {
