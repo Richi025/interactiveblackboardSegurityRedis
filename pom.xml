@@ -124,6 +124,14 @@
 							<rules>
 								<rule>
 									<element>PACKAGE</element>
+									<excludes>
+										<exclude>**/configurator/**</exclude>
+										<exclude>**/MvcConfig.class</exclude>
+										<exclude>**/InteractiveblackboardApplication.class</exclude>
+										<exclude>**/BBApplicationContextAware.class</exclude>
+										<exclude>**/BBConfigurator.class</exclude>
+										<exclude>**/BBEndpoint.class</exclude>
+									</excludes>
 									<limits>
 										<limit>
 											<counter>CLASS</counter>
