@@ -179,14 +179,14 @@ b624c2c56db5   sonarqube:latest   "/opt/sonarqube/dock…"   3 hours ago    Up 2
  
  http://127.0.0.1:5500/target/site/jacoco/index.html
 
-![alt text](images/imagetest1.png) 
+
+![alt text](images/imagetest2.png) 
 
 Now we enter the following link to see Sonar:
 
 http://localhost:9000/dashboard?id=interactiveblackboard&codeScope=overall
 
-![alt text](images/imagetest2.png) 
-
+![alt text](images/imagetest1.png) 
 
 # Proyect Structure
 
