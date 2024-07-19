@@ -145,6 +145,49 @@ https://ec2-3-92-144-238.compute-1.amazonaws.com:8443/login
 ![alt text](images/imageTest.png) 
 
 
+# Unit Test
+
+Class tests were carried out **TicketRepository** y **DrawingServiceController** .
+
+![alt text](images/imagetest0.png)
+
+1. We run the containers in docker with the following commands.
+
+    + **docker run --name some-redis -p 45000:6379 -d redis**
+
+    + **docker pull sonarqube**
+
+    + **docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest**
+
+    + **docker ps -a**
+
+```
+CONTAINER ID   IMAGE              COMMAND                  CREATED        STATUS                    PORTS                     NAMES
+b624c2c56db5   sonarqube:latest   "/opt/sonarqube/dock…"   3 hours ago    Up 2 hours                0.0.0.0:9000->9000/tcp    sonarqube
+24b5ed30f14c   redis              "docker-entrypoint.s…"   3 hours ago    Up 2 hours                0.0.0.0:45000->6379/tcp   some-redis
+
+```
+
+![alt text](images/imagetest3.png)
+
+
+2. Then to see the coverage with Jacoco and Sonar we use the following command.
+
++ **mvn verify sonar:sonar -D sonar.token=squ_a8435497035a95978f72c8b663649c304c46821f**
+
+ Now we enter the following link to see Jakoko:
+ 
+ http://127.0.0.1:5500/target/site/jacoco/index.html
+
+![alt text](images/imagetest1.png) 
+
+Now we enter the following link to see Sonar:
+
+http://localhost:9000/dashboard?id=interactiveblackboard&codeScope=overall
+
+![alt text](images/imagetest2.png) 
+
+
 # Proyect Structure
 
 ## Summary of Functionality with Login, HTTPS Security, Docker, and Redis
@@ -262,8 +305,8 @@ Component class handling operations with Redis for ticket management.
 ## Built with
 
 * [Maven](https://maven.apache.org/) - Dependency management
-* [java](https://www.java.com/es/) - Programming language
-* [Spring boot](https://start.spring.io/) - Framework
+* [Java](https://www.java.com/es/) - Programming language
+* [Spring Boot](https://start.spring.io/) - Framework
 
 ### Technologies Used
 - **Java:** Programming language.
@@ -272,6 +315,9 @@ Component class handling operations with Redis for ticket management.
 - **P5:** Creative JavaScript library for drawing graphics and animations in the web browser.
 - **Redis:** In-memory database for efficient real-time data management.
 - **Docker:** Platform for developing, shipping, and running applications in containers.
+- **Jacoco:** Code coverage library for Java.
+- **SonarQube:** Continuous inspection tool for code quality.
+
 
 ## Versioned
 

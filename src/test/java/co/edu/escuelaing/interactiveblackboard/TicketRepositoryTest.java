@@ -1,52 +1,68 @@
 package co.edu.escuelaing.interactiveblackboard;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-import co.edu.escuelaing.interactiveblackboard.repositories.TicketRepository;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
-
-@SpringBootTest
 public class TicketRepositoryTest {
 
-    @Autowired
-    private StringRedisTemplate mockStringRedisTemplate;
-
-    @Autowired
-    private ListOperations<String, String> mockListOperations;
-
-    @Autowired
+    @InjectMocks
     private TicketRepository ticketRepository;
+
+    @Mock
+    private StringRedisTemplate template;
+
+    @Mock
+    private ListOperations<String, String> listTickets;
+
+    @Mock
+    private RedisOperations<String, String> redisOperations;
+
+    @Mock
+    private BoundListOperations<String, String> boundListOperations;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        when(template.opsForList()).thenReturn(listTickets);
+        when(listTickets.getOperations()).thenReturn(redisOperations);
+        when(redisOperations.boundListOps("ticketStore")).thenReturn(boundListOperations);
+        ticketRepository.ticketnumber = 0; // Inicializa el ticketnumber a 0 antes de cada prueba
+    }
 
     @Test
     public void testGetTicket() {
-        // Configurar el comportamiento del mock para la operación leftPush()
-        when(mockListOperations.leftPush(anyString(), anyString())).thenReturn(1L);
-
         Integer ticket = ticketRepository.getTicket();
-
-        assertNotNull(ticket);
-        assertTrue(ticket >= 0); // Asumiendo que los tickets son no negativos
+        assertEquals(0, ticket);
+        verify(listTickets, times(1)).leftPush("ticketStore", "0");
+        
+        ticket = ticketRepository.getTicket();
+        assertEquals(1, ticket);
+        verify(listTickets, times(1)).leftPush("ticketStore", "1");
     }
 
     @Test
-    public void testCheckTicket() {
-        String testTicket = "12345";
-
-        // Configurar el comportamiento del mock para la operación boundListOps().remove()
-        when(mockListOperations.getOperations().boundListOps(anyString()).remove(eq(0), eq(testTicket))).thenReturn(1L);
-        System.out.println("df" + mockListOperations.getOperations().boundListOps(anyString()).remove(eq(0), eq(testTicket))).thenReturn(1L));
-        boolean isValid = ticketRepository.checkTicket(testTicket);
-
+    public void testCheckTicketValid() {
+        when(boundListOperations.remove(0, "0")).thenReturn(1L);
+        boolean isValid = ticketRepository.checkTicket("0");
         assertTrue(isValid);
+        verify(boundListOperations, times(1)).remove(0, "0");
+    }
+
+    @Test
+    public void testCheckTicketInvalid() {
+        when(boundListOperations.remove(0, "1")).thenReturn(0L);
+        boolean isValid = ticketRepository.checkTicket("1");
+        assertFalse(isValid);
+        verify(boundListOperations, times(1)).remove(0, "1");
     }
 }
-

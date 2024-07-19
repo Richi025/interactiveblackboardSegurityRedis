@@ -106,12 +106,14 @@
 						</goals>
 						<configuration>
 							<excludes>
-								<exclude>**/configurator/**</exclude>
+								
+								<exclude>**/RedisConfig.class</exclude>
 								<exclude>**/MvcConfig.class</exclude>
 								<exclude>**/InteractiveblackboardApplication.class</exclude>
 								<exclude>**/BBApplicationContextAware.class</exclude>
 								<exclude>**/BBConfigurator.class</exclude>
 								<exclude>**/BBEndpoint.class</exclude>
+								<exclude>**/WebSecurityConfig.class</exclude>
 							</excludes>
 						</configuration>
 					</execution>
@@ -125,18 +127,20 @@
 								<rule>
 									<element>PACKAGE</element>
 									<excludes>
-										<exclude>**/configurator/**</exclude>
+										
 										<exclude>**/MvcConfig.class</exclude>
 										<exclude>**/InteractiveblackboardApplication.class</exclude>
 										<exclude>**/BBApplicationContextAware.class</exclude>
 										<exclude>**/BBConfigurator.class</exclude>
 										<exclude>**/BBEndpoint.class</exclude>
+										<exclude>**/WebSecurityConfig.class</exclude>
+										<exclude>**/RedisConfig.class</exclude>
 									</excludes>
 									<limits>
 										<limit>
 											<counter>CLASS</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.00</minimum><!--Porcentaje mínimo de cubrimiento para construir el proyecto-->
+											<minimum>0.85</minimum><!--Porcentaje mínimo de cubrimiento para construir el proyecto-->
 										</limit>
 									</limits>
 								</rule>

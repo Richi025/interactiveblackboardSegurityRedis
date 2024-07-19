@@ -14,8 +14,6 @@ import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Component;
 
-import co.edu.escuelaing.interactiveblackboard.repositories.TicketRepository;
-
 @Component
 @ServerEndpoint("/bbService")
 public class BBEndpoint {

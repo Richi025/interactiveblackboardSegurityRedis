@@ -1,13 +1,9 @@
-package co.edu.escuelaing.interactiveblackboard.repositories;
+package co.edu.escuelaing.interactiveblackboard;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +14,7 @@ public class TicketRepository {
     // inject the template as ListOperations
     @Resource(name = "stringRedisTemplate")
     private ListOperations<String, String> listTickets;
-    private int ticketnumber;
+    public int ticketnumber;
 
     public TicketRepository() {
     }
@@ -34,7 +30,4 @@ public class TicketRepository {
         return (isValid > 0l);
     }
 
-    private void eviction() {
-        // Delete tickets after timout or include this functionality in checkticket
-    }
 }

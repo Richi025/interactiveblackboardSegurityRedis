@@ -5,8 +5,6 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import co.edu.escuelaing.interactiveblackboard.repositories.TicketRepository;
-
 public class DrawingServiceControllerTest {
 
     private DrawingServiceController drawingServiceController;
