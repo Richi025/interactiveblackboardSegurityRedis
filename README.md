@@ -173,16 +173,28 @@ b624c2c56db5   sonarqube:latest   "/opt/sonarqube/dock…"   3 hours ago    Up 2
 
 2. Then to see the coverage with Jacoco and Sonar we use the following command.
 
-+ **mvn verify sonar:sonar -D sonar.token=squ_a8435497035a95978f72c8b663649c304c46821f**
+    + Log in to sonar localhost:9000 change the password, the default username and password is admin.
 
- Now we enter the following link to see Jakoko:
- 
- http://127.0.0.1:5500/target/site/jacoco/index.html
+    + Enter the account options.
+
+    + Once the sonar is running, you must generate a token
+
+    + Run the following command:
+    ```
+    mvn verify sonar:sonar -D sonar.token=[GENERATED_TOKEN]
+    ```
+
+    Now you enter the following path to see the JaCoCo report:
+    ```
+     target/site/jacoco/index.html
+    ``` 
 
 
 ![alt text](images/imagetest2.png) 
 
 Now we enter the following link to see Sonar:
+
+
 
 http://localhost:9000/dashboard?id=interactiveblackboard&codeScope=overall
 
