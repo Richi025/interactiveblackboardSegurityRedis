@@ -186,7 +186,7 @@ Now we enter the following link to see Sonar:
 
 http://localhost:9000/dashboard?id=interactiveblackboard&codeScope=overall
 
-![alt text](images/imagetest1.png) 
+![alt text](images/imagete.png) 
 
 # Proyect Structure
 
